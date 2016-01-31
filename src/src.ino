@@ -33,7 +33,7 @@ app_vars_t app_vars;
  */
 
 void setup() {
-  pinMode(13, OUTPUT)
+  pinMode(13, OUTPUT);
   Serial.begin(9600);
   IQRF _Init(MyIqrfRxHandler, MyIqrfTxHandler);
   MsTimer2::set(1, cb_timer1ms);
