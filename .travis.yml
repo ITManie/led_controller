@@ -6,8 +6,8 @@ cache:
     directories:
         - "~/.platformio"
 env:
-    - PLATFORMIO_CI_SRC=src/
+    - PLATFORMIO_CI_SRC=src/src.ino
 install:
     - pip install -U platformio
 script:
-    - platformio ci --lib="." --board=uno
+    - platformio ci --lib="lib/MsTimer2-1.1/" --lib="lib/IQRF/" --board=uno
