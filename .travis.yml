@@ -10,4 +10,4 @@ env:
 install:
     - pip install -U platformio
 script:
-    - platformio ci --lib="lib/MsTimer2-1.1/" --lib="lib/IQRF/" --board=uno
+    - platformio ci --lib="lib/MsTimer2-1.1/" --lib="lib/IQRF/" --board=uno --board=nanoatmega328
