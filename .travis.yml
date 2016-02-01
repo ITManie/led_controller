@@ -9,8 +9,8 @@ env:
     - PLATFORMIO_CI_SRC=src/src.ino
 install:
     - pip install -U platformio
+    # TODO: register IQRF library and delete MsTimer2 installation
     # Install MsTimer2 library
     - platformio lib install 137
-    - platformio lib register https://raw.githubusercontent.com/ITManie/IQRF_library/master/library.json
 script:
     - platformio ci --lib="lib/IQRF/" --board=uno --board=nanoatmega328
