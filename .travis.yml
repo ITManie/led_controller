@@ -9,5 +9,7 @@ env:
     - PLATFORMIO_CI_SRC=src/src.ino
 install:
     - pip install -U platformio
+    # Install MsTimer2 library
+    - platformio lib install 137
 script:
-    - platformio ci --lib="lib/MsTimer2-1.1/" --lib="lib/IQRF/" --board=uno --board=nanoatmega328
+    - platformio ci --lib="lib/IQRF/" --board=uno --board=nanoatmega328
