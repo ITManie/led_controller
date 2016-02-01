@@ -1,4 +1,6 @@
-#include "iqrf_library.h"
+#include <SPI.h>
+#include <MsTimer2.h>
+#include <iqrf_library.h>
 
 #define USER_TIMER_PERIOD 5000 // 5 sec
 
