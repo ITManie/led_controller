@@ -1,4 +1,4 @@
-# led_controller_arduino
+# led_controller
 
 [![Build Status](https://travis-ci.org/ITManie/led_controller.svg?branch=master)](https://travis-ci.org/ITManie/led_controller)
 
