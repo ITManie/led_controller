@@ -67,7 +67,7 @@ void AppTimerHandler(void) {
 }
 
 
-void MyIqrfRxHandler(void){
+void MyIqrfRxHandler(void) {
   IQRF_GetRxData(app_vars.myIqrfRxBuf, IQRF_GetRxDataSize());
   Serial.print("IQRF receive done: ");
   Serial.write(app_vars.myIqrfRxBuf, IQRF_GetRxDataSize());
