@@ -35,7 +35,7 @@ app_vars_t app_vars;
  */
 
 void setup() {
-  pinMode(13, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   IQRF_Init(MyIqrfRxHandler, MyIqrfTxHandler);
   MsTimer2::set(1, cb_timer1ms);
@@ -77,3 +77,4 @@ void MyIqrfRxHandler(void) {
 void MyIqrfTxHandler(UINT8 txPktId, UINT8 txPktResult) {
   Serial.println("IQRF send done");
 }
+
