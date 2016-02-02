@@ -12,10 +12,4 @@ install:
     # Install MsTimer2 and IQRF library
     - platformio lib install 137 584
 script:
-    - platformio ci --board=uno
-    - platformio ci --board=leonardo
-    - platformio ci --board=diecimilaatmega168
-    - platformio ci --board=megaatmega2560
-    - platformio ci --board=megaatmega1280
-    - platformio ci --board=1284p16m
-    - platformio ci --board=644pa16m
+    - platformio ci --board=uno --board=leonardo --board=diecimilaatmega168 --board=megaatmega2560 --board=megaatmega1280
