@@ -103,6 +103,27 @@ void MyIqrfRxHandler(void) {
   Serial.print("IQRF receive done: ");
   Serial.write(app_vars.myIqrfRxBuf, IQRF_GetRxDataSize());
   Serial.println();
+  char red_buffer[3];
+  red_buffer[0] = app_vars.myIqrfRxBuf[0];
+  red_buffer[1] = app_vars.myIqrfRxBuf[1];
+  red_buffer[2] = app_vars.myIqrfRxBuf[2];
+  int red_value = atoi(red_buffer);
+  char green_buffer[3];
+  green_buffer[0] = app_vars.myIqrfRxBuf[3];
+  green_buffer[1] = app_vars.myIqrfRxBuf[4];
+  green_buffer[2] = app_vars.myIqrfRxBuf[5];
+  int green_value = atoi(green_buffer);
+  char blue_buffer[3];
+  blue_buffer[0] = app_vars.myIqrfRxBuf[6];
+  blue_buffer[1] = app_vars.myIqrfRxBuf[7];
+  blue_buffer[2] = app_vars.myIqrfRxBuf[8];
+  int blue_value = atoi(blue_buffer);
+  int alpha_value = app_vars.myIqrfRxBuf[9];
+  if (alpha_value == 0) {
+    analogWrite(red_led, red_value);
+    analogWrite(green_led, green_value);
+    analogWrite(blue_led, blue_value);
+  }
 }
 
 void MyIqrfTxHandler(UINT8 txPktId, UINT8 txPktResult) {
