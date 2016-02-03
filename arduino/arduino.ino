@@ -1,3 +1,29 @@
+/*
+                      +-----+
+         +------------| USB |------------+
+         |            +-----+            |
+    SCK  | [*]D13                 D12[*] |  MISO
+         | [ ]3.3V                D11[*]~|  MOSI
+         | [ ]V.ref     ___       D10[*]~|  SS
+         | [ ]A0       / N \       D9[ ]~|
+         | [ ]A1      /  A  \      D8[ ] |
+         | [ ]A2      \  N  /      D7[ ] |
+         | [ ]A3       \_0_/       D6[*]~|  RED_LED
+         | [ ]A4                   D5[*]~|  GREEN_LED
+         | [ ]A5                   D4[ ] |
+         | [ ]A6                   D3[*]~|  BLUE_LED
+         | [ ]A7                   D2[ ] |
+         | [ ]5V                  GND[ ] |     
+         | [ ]RST                 RST[ ] |
+         | [ ]GND   5V MOSI GND   TX1[ ] |
+         | [ ]Vin   [ ] [ ] [ ]   RX1[ ] |
+         |          [ ] [ ] [ ]          |
+         |          MISO SCK RST         |
+         | NANO-V3                       |
+         +-------------------------------+
+         
+      http://busyducks.com/ascii-art-arduinos
+ */
 #include <SPI.h>
 #include <MsTimer2.h>
 #include <iqrf_library.h>
@@ -18,7 +44,7 @@ void cb_timer1ms();
  * Global variables
  */
 
-//App data
+// App data
 typedef struct 
 {
   uint8_t myIqrfRxBuf[IQ_PKT_SIZE];
@@ -29,6 +55,11 @@ typedef struct
 } app_vars_t;
 
 app_vars_t app_vars;
+
+// Const data
+const int red_led = 6;
+const int green_led = 5;
+const int blue_led = 3;
 
 /**
  * Init peripherals
