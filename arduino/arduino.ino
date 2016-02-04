@@ -69,6 +69,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   IQRF_Init(MyIqrfRxHandler, MyIqrfTxHandler);
+  Serial.println("IQRF module: " + IQRF_GetModuleType());
   MsTimer2::set(1, cb_timer1ms);
   MsTimer2::start();
   memset(&app_vars, 0, sizeof(app_vars_t));
@@ -108,17 +109,21 @@ void MyIqrfRxHandler(void) {
   red_buffer[1] = app_vars.myIqrfRxBuf[1];
   red_buffer[2] = app_vars.myIqrfRxBuf[2];
   int red_value = atoi(red_buffer);
+  Serial.println("Red: " + red_value);
   char green_buffer[3];
   green_buffer[0] = app_vars.myIqrfRxBuf[3];
   green_buffer[1] = app_vars.myIqrfRxBuf[4];
   green_buffer[2] = app_vars.myIqrfRxBuf[5];
   int green_value = atoi(green_buffer);
+  Serial.println("Green: " + green_value);
   char blue_buffer[3];
   blue_buffer[0] = app_vars.myIqrfRxBuf[6];
   blue_buffer[1] = app_vars.myIqrfRxBuf[7];
   blue_buffer[2] = app_vars.myIqrfRxBuf[8];
   int blue_value = atoi(blue_buffer);
+  Serial.println("Blue: " + blue_value);
   int alpha_value = app_vars.myIqrfRxBuf[9];
+  Serial.println("Aplha:" + alpha_value);
   if (alpha_value == 0) {
     analogWrite(red_led, red_value);
     analogWrite(green_led, green_value);
