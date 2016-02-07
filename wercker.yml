@@ -1,4 +1,4 @@
-box: wercker/python:2.7
+box: python:2.7
 build:
   steps:
     - pip install -U platformio
