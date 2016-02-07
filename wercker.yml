@@ -1,0 +1,6 @@
+box: wercker/python:2.7
+build:
+  steps:
+    - pip install -U platformio
+    - platformio lib install 137 584
+    - platformio ci --board=uno --board=leonardo --board=diecimilaatmega168 --board=megaatmega2560 --board=megaatmega1280
