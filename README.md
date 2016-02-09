@@ -11,3 +11,49 @@ Arduino project to control RGB LED strip
 
  * [IQRF](https://github.com/ITManie/IQRF_library)
  * [MsTimer2](https://github.com/PaulStoffregen/MsTimer2)
+
+## Packets
+
+### Echo controller
+<table>
+<tr>
+<th>00-FF</th>
+<th>100-1FF</th>
+<th>200-2FF</th>
+<th>300-3FF</th>
+<th>400-4FF</th>
+<th>500-5FF</th>
+<th>600-6FF</th>
+</tr>
+<tr>
+<td>version</td>
+<td>type</td>
+<td colspan="4">address</td>
+<td>status</td>
+</tr>
+</table>
+
+### Set color
+<table>
+<tr>
+<th>00-FF</th>
+<th>100-1FF</th>
+<th>200-2FF</th>
+<th>300-3FF</th>
+<th>400-4FF</th>
+<th>500-5FF</th>
+<th>600-6FF</th>
+<th>700-7FF</th>
+<th>800-8FF</th>
+<th>900-9FF</th>
+</tr>
+<tr>
+<td>version</td>
+<td>type</td>
+<td colspan="4">address</td>
+<td>red</td>
+<td>green</td>
+<td>blue</td>
+<td>alpha</td>
+</tr>
+</table>
