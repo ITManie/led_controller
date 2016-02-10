@@ -13,3 +13,10 @@ install:
     - platformio lib install 137 584
 script:
     - platformio ci --board=uno --board=leonardo --board=diecimilaatmega168 --board=megaatmega2560 --board=megaatmega1280
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/48475240650828086652
+    on_success: change
+    on_failure: always
+    on_start: never
