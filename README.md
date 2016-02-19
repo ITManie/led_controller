@@ -8,29 +8,60 @@
 
 Arduino project to control RGB LED strip
 
-## Libraries
+## Arduino libraries
 
  * [IQRF](https://github.com/ITManie/IQRF_library)
  * [MsTimer2](https://github.com/PaulStoffregen/MsTimer2)
 
 ## Packets
 
-### Echo controller
+### Ping
 <table>
 <tr>
-<th>00-FF</th>
+<th>0-FF</th>
 <th>100-1FF</th>
 <th>200-2FF</th>
 <th>300-3FF</th>
 <th>400-4FF</th>
 <th>500-5FF</th>
-<th>600-6FF</th>
 </tr>
 <tr>
 <td>version</td>
 <td>type</td>
 <td colspan="4">address</td>
-<td>status</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+</tr>
+</table>
+
+### Pong
+<table>
+<tr>
+<th>0-FF</th>
+<th>100-1FF</th>
+<th>200-2FF</th>
+<th>300-3FF</th>
+<th>400-4FF</th>
+<th>500-5FF</th>
+</tr>
+<tr>
+<td>version</td>
+<td>type</td>
+<td colspan="4">address</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
 </tr>
 </table>
 
@@ -56,5 +87,17 @@ Arduino project to control RGB LED strip
 <td>green</td>
 <td>blue</td>
 <td>alpha</td>
+</tr>
+<tr>
+<td>0</td>
+<td>3</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-FF</td>
+<td>0-1</td>
 </tr>
 </table>
