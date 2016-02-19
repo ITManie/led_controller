@@ -6,8 +6,7 @@ cache:
     directories:
         - "~/.platformio"
 env:
-    - PLATFORMIO_CI_SRC=arduino/arduino.ino
-    - PLATFORMIO_CI_SRC=arduino/utils.ino
+    - PLATFORMIO_CI_SRC=arduino/
 install:
     - pip install -U platformio
     # Install MsTimer2 and IQRF library
