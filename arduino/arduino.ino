@@ -32,6 +32,7 @@
 
 void IqrfRx();
 void IqrfTx(uint8_t txPktId, uint8_t txPktResult);
+void cb_timer1ms();
 
 // Set adress to 00.00.00.00
 uint8_t my_addr[4] = {0x00, 0x00, 0x00, 0x00};
