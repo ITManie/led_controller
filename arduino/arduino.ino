@@ -34,7 +34,7 @@ void IqrfRx();
 void IqrfTx(uint8_t txPktId, uint8_t txPktResult);
 
 // Set adress to 00.00.00.00
-uint8_t my_address[4] = {0x00, 0x00, 0x00, 0x00};
+uint8_t my_addr[4] = {0x00, 0x00, 0x00, 0x00};
 // Set version of protocol
 uint8_t ver = 0x00;
 

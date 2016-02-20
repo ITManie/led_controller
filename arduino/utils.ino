@@ -8,12 +8,23 @@ void cb_timer1ms(void) {
   }
 }
 
-boolean isMyAddress(uint8_t my_addr[], uint8_t buf[]) {
+boolean isMyAddress(uint8_t buf[]) {
   uint8_t addr[4] = {buf[2], buf[3], buf[4], buf[5]};
-  if(addr == my_addr) {
+  if (addr == my_addr) {
     return true;
   } else {
     return false;
+  }
+}
+
+void sentPong() {
+  uint8_t packet[6] = {0, 1, my_addr[0], my_addr[1], my_addr[2], my_addr[3]};
+  if (iqrf.appTimerAck) {
+    iqrf.TxBuf = (uint8_t *)malloc(sizeof(packet));
+    if (iqrf.TxBuf != NULL) {
+      memcpy(iqrf.TxBuf, (uint8_t *)&packet, sizeof(packet));
+      iqrf.testPktId = IQRF_SendData(iqrf.TxBuf, sizeof(packet), 1);
+    }
   }
 }
 
@@ -43,7 +54,7 @@ void IqrfRx(void) {
   if (prot_version == 0x00) {
     uint8_t prot_type = iqrf.RxBuf[1];
     if (prot_type == 0x03) {
-      if (isMyAddress(my_address, iqrf.RxBuf)) {
+      if (isMyAddress(iqrf.RxBuf)) {
         setColor(iqrf.RxBuf);
       }
     }
