@@ -40,10 +40,8 @@ uint8_t my_addr[4] = {0x00, 0x00, 0x00, 0x00};
 uint8_t ver = 0x00;
 
 /**
- * Global variables
+ * Data structure
  */
-
-// App data
 typedef struct 
 {
   uint8_t RxBuf[IQ_PKT_SIZE];
@@ -55,13 +53,17 @@ typedef struct
 
 iqrf_t iqrf;
 
-// Const data
+/**
+ * Define pins of RGB LED
+ */
 const int red_led = 6;
 const int green_led = 5;
 const int blue_led = 3;
 
 /**
  * Init peripherals
+ * @param none
+ * @return none
  */
 
 void setup() {
@@ -77,7 +79,9 @@ void setup() {
 }
 
 /**
- * Main
+ * Main loop
+ * @param none
+ * @return none
  */
 
 void loop() {
