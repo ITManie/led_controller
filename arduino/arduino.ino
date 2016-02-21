@@ -1,28 +1,27 @@
 /*
-                      +-----+
-         +------------| USB |------------+
-         |            +-----+            |
-    SCK  | [*]D13                 D12[*] |  MISO
-         | [ ]3.3V                D11[*]~|  MOSI
-         | [ ]V.ref     ___       D10[*]~|  SS
-         | [ ]A0       / N \       D9[ ]~|
-         | [ ]A1      /  A  \      D8[ ] |
-         | [ ]A2      \  N  /      D7[ ] |
-         | [ ]A3       \_0_/       D6[*]~|  RED_LED
-         | [ ]A4                   D5[*]~|  GREEN_LED
-         | [ ]A5                   D4[ ] |
-         | [ ]A6                   D3[*]~|  BLUE_LED
-         | [ ]A7                   D2[ ] |
-         | [ ]5V                  GND[ ] |     
-         | [ ]RST                 RST[ ] |
-         | [ ]GND   5V MOSI GND   TX1[ ] |
-         | [ ]Vin   [ ] [ ] [ ]   RX1[ ] |
-         |          [ ] [ ] [ ]          |
-         |          MISO SCK RST         |
-         | NANO-V3                       |
-         +-------------------------------+
-         
-      http://busyducks.com/ascii-art-arduinos
+                       +-----+
+          +------------| USB |------------+
+          |            +-----+            |
+ IQRF_SCK | [*]D13                 D12[*] | IQRF_MISO
+          | [ ]3.3V                D11[*]~| IQRF_MOSI
+          | [ ]V.ref     ___       D10[*]~| IQRF_SS
+          | [ ]A0       / N \       D9[ ]~|
+          | [ ]A1      /  A  \      D8[ ] |
+          | [ ]A2      \  N  /      D7[ ] |
+          | [ ]A3       \_0_/       D6[*]~| LED_RED
+          | [ ]A4                   D5[*]~| LED_GREEN
+          | [ ]A5                   D4[ ] |
+          | [ ]A6                   D3[*]~| LED_BLUE
+          | [ ]A7                   D2[ ] |
+ IQRF_+5V | [*]5V                  GND[*] | LED_GND
+          | [ ]RST                 RST[ ] |
+ IQRF_GND | [*]GND   5V MOSI GND   TX1[ ] |
+          | [ ]Vin   [ ] [ ] [ ]   RX1[ ] |
+          |          [ ] [ ] [ ]          |
+          |          MISO SCK RST         |
+          | NANO-V3                       |
+          +-------------------------------+
+       http://busyducks.com/ascii-art-arduinos
  */
 #include <SPI.h>
 #include <MsTimer2.h>
