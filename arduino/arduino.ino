@@ -58,9 +58,6 @@ iqrf_t iqrf;
 const int red_led = 6;
 const int green_led = 5;
 const int blue_led = 3;
-pinMode(red_led, OUTPUT);
-pinMode(green_led, OUTPUT);
-pinMode(blue_led, OUTPUT);
 
 /**
  * Init peripherals
@@ -69,7 +66,10 @@ pinMode(blue_led, OUTPUT);
  */
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);  
+  pinMode(red_led, OUTPUT);
+  pinMode(green_led, OUTPUT);
+  pinMode(blue_led, OUTPUT);
   Serial.begin(9600);
   IQRF_Init(IqrfRx, IqrfTx);
   Serial.println("IQRF module: " + IQRF_GetModuleType());
