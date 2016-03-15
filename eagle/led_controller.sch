@@ -1744,6 +1744,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
+<class number="1" name="3apm" width="2.54" drill="0">
+</class>
 </classes>
 <parts>
 <part name="Q1" library="transistor-power" deviceset="TIP120" device=""/>
@@ -1771,6 +1773,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="P+5" library="supply1" deviceset="+5V" device=""/>
 <part name="P+6" library="supply1" deviceset="+12V" device=""/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
+<part name="GND8" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1784,9 +1787,9 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="GND1" gate="1" x="71.12" y="7.62"/>
 <instance part="GND2" gate="1" x="71.12" y="25.4"/>
 <instance part="GND3" gate="1" x="71.12" y="43.18"/>
-<instance part="GND4" gate="1" x="132.08" y="48.26" rot="R90"/>
+<instance part="GND4" gate="1" x="129.54" y="48.26" rot="R90"/>
 <instance part="P+1" gate="1" x="63.5" y="68.58" rot="R270"/>
-<instance part="P+2" gate="1" x="132.08" y="43.18" rot="R270"/>
+<instance part="P+2" gate="1" x="129.54" y="43.18" rot="R270"/>
 <instance part="IQRF" gate="G$1" x="106.68" y="-15.24" rot="R90"/>
 <instance part="P+3" gate="1" x="121.92" y="-7.62" rot="R270"/>
 <instance part="GND5" gate="1" x="114.3" y="-5.08" rot="R180"/>
@@ -1802,6 +1805,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="P+5" gate="1" x="53.34" y="12.7"/>
 <instance part="P+6" gate="1" x="53.34" y="-12.7" rot="R180"/>
 <instance part="GND7" gate="1" x="63.5" y="0" rot="R90"/>
+<instance part="GND8" gate="1" x="83.82" y="43.18" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -1851,7 +1855,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="M1" gate="G$1" pin="GND.2"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="129.54" y1="48.26" x2="124.46" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="127" y1="48.26" x2="124.46" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="1"/>
@@ -1866,6 +1870,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="IC1" gate="A1" pin="GND"/>
 <pinref part="GND7" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="M1" gate="G$1" pin="GND.1"/>
+<pinref part="GND8" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -1876,7 +1884,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="M1" gate="G$1" pin="5V"/>
 <pinref part="P+2" gate="1" pin="+5V"/>
-<wire x1="129.54" y1="43.18" x2="124.46" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="127" y1="43.18" x2="124.46" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="A1" pin="VO"/>
@@ -1942,7 +1950,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="G" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="+12V" class="0">
+<net name="+12V" class="1">
 <segment>
 <pinref part="P+1" gate="1" pin="+12V"/>
 <pinref part="+12V" gate="G$1" pin="1"/>
@@ -1957,7 +1965,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="P+6" gate="1" pin="+12V"/>
 </segment>
 </net>
-<net name="N$11" class="0">
+<net name="N$11" class="1">
 <segment>
 <pinref part="J1" gate="G$1" pin="3"/>
 <pinref part="D1" gate="G$1" pin="A"/>
