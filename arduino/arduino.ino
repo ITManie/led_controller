@@ -8,10 +8,10 @@
           | [ ]A0       / N \       D9[ ]~|
           | [ ]A1      /  A  \      D8[ ] |
           | [ ]A2      \  N  /      D7[ ] |
-          | [ ]A3       \_0_/       D6[*]~| LED_RED
-          | [ ]A4                   D5[*]~| LED_GREEN
+          | [ ]A3       \_0_/       D6[*]~| LED_BLUE
+          | [ ]A4                   D5[*]~| LED_RED
           | [ ]A5                   D4[ ] |
-          | [ ]A6                   D3[*]~| LED_BLUE
+          | [ ]A6                   D3[*]~| LED_GREEN
           | [ ]A7                   D2[ ] |
  IQRF_+5V | [*]5V                  GND[*] | LED_GND
           | [ ]RST                 RST[ ] |
@@ -55,9 +55,9 @@ iqrf_t iqrf;
 /**
  * Define pins of RGB LED
  */
-const int red_led = 6;
-const int green_led = 5;
-const int blue_led = 3;
+const int red_led = 5;
+const int green_led = 3;
+const int blue_led = 6;
 
 /**
  * Init peripherals
