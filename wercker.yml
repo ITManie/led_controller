@@ -13,4 +13,4 @@ build:
       name: platformio
       code: |
         platformio lib install 137 584
-        platformio ci --board=uno --board=leonardo --board=diecimilaatmega168 --board=megaatmega2560 --board=megaatmega1280
+        platformio ci --board=uno
