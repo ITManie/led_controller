@@ -72,7 +72,17 @@ void setup() {
   pinMode(blue_led, OUTPUT);
   Serial.begin(9600);
   IQRF_Init(IqrfRx, IqrfTx);
-  Serial.println("IQRF module: " + IQRF_GetModuleType());
+  switch(IQRF_GetModuleType()) {
+    case TR_52D:
+      Serial.println("IQRF module: TR-52D");
+      break;
+    case TR_72D:
+      Serial.println("IQRF module: TR-72D");
+      break;
+    default:
+      Serial.println("IQRF module: UNKNOWN");
+      break;
+  }
   MsTimer2::set(1, cb_timer1ms);
   MsTimer2::start();
   memset(&iqrf, 0, sizeof(iqrf_t));
