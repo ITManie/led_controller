@@ -27,7 +27,8 @@
 #include <MsTimer2.h>
 #include <iqrf_library.h>
 
-#define USER_TIMER_PERIOD 5000 // 5 sec
+#define DEBUG // Debug mode
+#define USER_TIMER_PERIOD 2000 // 2 sec
 
 void IqrfRx();
 void IqrfTx(uint8_t txPktId, uint8_t txPktResult);
@@ -97,5 +98,6 @@ void setup() {
  */
 
 void loop() {
+  // TR module SPI comunication driver
   IQRF_Driver();
 }

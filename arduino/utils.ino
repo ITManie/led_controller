@@ -26,6 +26,9 @@ boolean isMyAddress(uint8_t buf[] = iqrf.RxBuf) {
  * @return none
  */
 void receivePing() {
+  #ifdef DEBUG
+  Serial.println("Receive ping.");
+  #endif
   if (isMyAddress()) {
     sendPong(my_addr, iqrf.TxBuf);
   }
@@ -40,10 +43,16 @@ void receivePing() {
 void sendPong(uint8_t addr[], uint8_t buf[]) {
   uint8_t packet[6] = {0, 1, addr[0], addr[1], addr[2], addr[3]};
   if (iqrf.appTimerAck) {
+    // Alocate memory for Tx packet
     buf = (uint8_t *)malloc(sizeof(packet));
     if (buf != NULL) {
+      // Copy data from packet to IQRF Tx packet
       memcpy(buf, (uint8_t *)&packet, sizeof(packet));
+      // Dend data and unalocate data buffer
       iqrf.testPktId = IQRF_SendData(buf, sizeof(packet), 1);
+      #ifdef DEBUG
+      Serial.println("Sending pong.");
+      #endif
     }
     iqrf.appTimerAck = 0;
   }
@@ -59,6 +68,13 @@ void setColor(uint8_t buf[] = iqrf.RxBuf) {
   uint8_t green_value = buf[7];
   uint8_t blue_value = buf[8];
   uint8_t alpha_value = buf[9];
+  #ifdef DEBUG
+  Serial.println("RED\tGREEN\tBLUE\tALPHA");
+  Serial.print(red_value, HEX); Serial.print("\t");
+  Serial.print(green_value, HEX); Serial.print("\t");
+  Serial.print(blue_value, HEX); Serial.print("\t");
+  Serial.println(alpha_value, HEX);
+  #endif
   if (isMyAddress() && alpha_value == 0x00) {
     analogWrite(red_led, red_value);
     analogWrite(green_led, green_value);
@@ -73,12 +89,22 @@ void setColor(uint8_t buf[] = iqrf.RxBuf) {
  */
 void IqrfRx() {
   IQRF_GetRxData(iqrf.RxBuf, IQRF_GetRxDataSize());
+  #ifdef DEBUG
   Serial.print("IQRF receive done: ");
   Serial.write(iqrf.RxBuf, IQRF_GetRxDataSize());
   Serial.println();
+  #endif
   uint8_t prot_version = iqrf.RxBuf[0];
+  #ifdef DEBUG
+  Serial.print("Protocol version: ");
+  Serial.println(prot_version, HEX);
+  #endif
   if (prot_version == 0x00) {
     uint8_t prot_type = iqrf.RxBuf[1];
+    #ifdef DEBUG
+    Serial.print("Protocol type: ");
+    Serial.println(prot_type, HEX);
+    #endif
     switch (prot_type) {
       case 0x00:
         receivePing();
@@ -97,6 +123,8 @@ void IqrfRx() {
  * @return none
  */
 void IqrfTx(uint8_t txPktId, uint8_t txPktResult) {
+  #ifdef DEBUG
   Serial.println("IQRF send done");
+  #endif
 }
 
