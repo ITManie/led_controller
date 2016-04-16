@@ -16,29 +16,28 @@
  */
 
 /*
-                       +-----+
-          +------------| USB |------------+
-          |            +-----+            |
- IQRF_SCK | [*]D13                 D12[*] | IQRF_MISO
-          | [ ]3.3V                D11[*]~| IQRF_MOSI
-          | [ ]V.ref     ___       D10[*]~| IQRF_SS
-          | [ ]A0       / N \       D9[ ]~|
-          | [ ]A1      /  A  \      D8[ ] |
-          | [ ]A2      \  N  /      D7[ ] |
-          | [ ]A3       \_0_/       D6[*]~| LED_BLUE
-          | [ ]A4                   D5[*]~| LED_RED
-          | [ ]A5                   D4[ ] |
-          | [ ]A6                   D3[*]~| LED_GREEN
-          | [ ]A7                   D2[ ] |
- IQRF_+5V | [*]5V                  GND[*] | LED_GND
-          | [ ]RST                 RST[ ] |
- IQRF_GND | [*]GND   5V MOSI GND   TX1[ ] |
-          | [ ]Vin   [ ] [ ] [ ]   RX1[ ] |
-          |          [ ] [ ] [ ]          |
-          |          MISO SCK RST         |
-          | NANO-V3                       |
-          +-------------------------------+
-       http://busyducks.com/ascii-art-arduinos
+                      _____
+           __________| USB |__________ 
+          |          |_____|          |
+ IQRF_SCK | [*]D13             D12[*] | IQRF_MISO
+          | [ ]3.3V            D11[*]~| IQRF_MOSI
+          | [ ]V.ref   ___     D10[*]~| IQRF_SS
+          | [ ]A0     | N |     D9[*]~| IQRF_TRPWR
+          | [ ]A1     | A |     D8[ ] |
+          | [ ]A2     | N |     D7[ ] |
+          | [ ]A3     |_0_|     D6[*]~| LED_BLUE
+          | [ ]A4               D5[*]~| LED_RED
+          | [ ]A5               D4[ ] |
+          | [ ]A6               D3[*]~| LED_GREEN
+          | [ ]A7               D2[ ] |
+ IQRF_+5V | [*]5V              GND[*] | LED_GND
+          | [ ]RST             RST[ ] |
+ IQRF_GND | [*]GND 5V MOSI GND TX1[ ] |
+          | [ ]Vin [ ] [ ] [ ] RX1[ ] |
+          |        [ ] [ ] [ ]        |
+          |       MISO SCK RST        |
+          | NANO-V3                   |
+          |___________________________|
  */
 #include <SPI.h>
 #include <MsTimer2.h>
@@ -53,7 +52,7 @@ void cb_timer1ms();
 
 // Set adress to 00.00.00.00
 uint8_t my_addr[4] = {0x00, 0x00, 0x00, 0x00};
-// Set version of protocol
+// Set protocol version
 uint8_t ver = 0x00;
 
 /**
@@ -82,9 +81,7 @@ const int blue_led = 6;
  * @param none
  * @return none
  */
-
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);  
   pinMode(red_led, OUTPUT);
   pinMode(green_led, OUTPUT);
   pinMode(blue_led, OUTPUT);
@@ -113,7 +110,6 @@ void setup() {
  * @param none
  * @return none
  */
-
 void loop() {
   // TR module SPI comunication driver
   IQRF_Driver();

@@ -46,9 +46,7 @@ void receivePing() {
   #ifdef DEBUG
   Serial.println("Receive ping.");
   #endif
-  if (isMyAddress()) {
-    sendPong(my_addr, iqrf.TxBuf);
-  }
+  sendPong(my_addr, iqrf.TxBuf);
 }
 
 /**
@@ -85,17 +83,29 @@ void setColor(uint8_t buf[] = iqrf.RxBuf) {
   uint8_t green_value = buf[7];
   uint8_t blue_value = buf[8];
   uint8_t alpha_value = buf[9];
+  setColorRGB(red_value, green_value, blue_value, alpha_value);
+}
+
+/**
+ * Set color of RGB LED strip via PWM
+ * @param red Value of red color (0-255)
+ * @param green Value of green color (0-255)
+ * @param blue Value of blue color (0-255)
+ * @param alpha Value of alpha (0 - ON, 1 - OFF)
+ * @return none
+ */
+void setColorRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
   #ifdef DEBUG
   Serial.println("RED\tGREEN\tBLUE\tALPHA");
-  Serial.print(red_value, HEX); Serial.print("\t");
-  Serial.print(green_value, HEX); Serial.print("\t");
-  Serial.print(blue_value, HEX); Serial.print("\t");
-  Serial.println(alpha_value, HEX);
+  Serial.print(red, HEX); Serial.print("\t");
+  Serial.print(green, HEX); Serial.print("\t");
+  Serial.print(blue, HEX); Serial.print("\t");
+  Serial.println(alpha, HEX);
   #endif
-  if (isMyAddress() && alpha_value == 0x00) {
-    analogWrite(red_led, red_value);
-    analogWrite(green_led, green_value);
-    analogWrite(blue_led, blue_value);
+  if (alpha == 0) {
+    analogWrite(red_led, red);
+    analogWrite(green_led, green);
+    analogWrite(blue_led, blue);
   }
 }
 
@@ -111,24 +121,26 @@ void IqrfRx() {
   Serial.write(iqrf.RxBuf, IQRF_GetRxDataSize());
   Serial.println();
   #endif
-  uint8_t prot_version = iqrf.RxBuf[0];
-  #ifdef DEBUG
-  Serial.print("Protocol version: ");
-  Serial.println(prot_version, HEX);
-  #endif
-  if (prot_version == 0x00) {
-    uint8_t prot_type = iqrf.RxBuf[1];
+  if (isMyAddress) {
+    uint8_t prot_version = iqrf.RxBuf[0];
     #ifdef DEBUG
-    Serial.print("Protocol type: ");
-    Serial.println(prot_type, HEX);
+    Serial.print("Protocol version: ");
+    Serial.println(prot_version, HEX);
     #endif
-    switch (prot_type) {
-      case 0x00:
-        receivePing();
-        break;
-      case 0x02:
-        setColor();
-        break;
+    if (prot_version == 0) {
+      uint8_t prot_type = iqrf.RxBuf[1];
+      #ifdef DEBUG
+      Serial.print("Protocol type: ");
+      Serial.println(prot_type, HEX);
+      #endif
+      switch (prot_type) {
+        case 0:
+          receivePing();
+          break;
+        case 2:
+          setColor();
+          break;
+      }
     }
   }
 }
