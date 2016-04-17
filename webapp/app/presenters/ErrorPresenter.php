@@ -2,27 +2,22 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Tracy\ILogger;
+use Nette,
+	Tracy\ILogger;
 
+class ErrorPresenter extends Nette\Object implements Nette\Application\IPresenter {
 
-class ErrorPresenter extends Nette\Object implements Nette\Application\IPresenter
-{
 	/** @var ILogger */
 	private $logger;
 
-
-	public function __construct(ILogger $logger)
-	{
+	public function __construct(ILogger $logger) {
 		$this->logger = $logger;
 	}
-
 
 	/**
 	 * @return Nette\Application\IResponse
 	 */
-	public function run(Nette\Application\Request $request)
-	{
+	public function run(Nette\Application\Request $request) {
 		$e = $request->getParameter('exception');
 
 		if ($e instanceof Nette\Application\BadRequestException) {
