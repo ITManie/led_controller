@@ -16,30 +16,57 @@
  */
 #include "iqrf/template-basic.h"
 
+#define RX_FILTER 0
+
 void APPLICATION() {
+	uns8 mid0;
+	// Enable SPI
 	enableSPI();
+	// Get module info
+	moduleInfo();
+	// Get lowest byte of Module ID
+	mid0 = bufferINFO[0];
+	// XLP RX mode - RFIC is periodicaly switched ON/OFF
 	setRFmode(_WPE | _RX_STD | _TX_STD);
+	// Wait Packed End active so the toutRF can be set to minimum
 	toutRF = 1;
-   
+
+	// Main cycle (perpetually repeated)
 	while(1) {
-		if(checkRF(0)) {
+		// RF signal detection (takes cca 1ms)
+		if(checkRF(RX_FILTER)) {
+			// If anything was received
 			if(RFRXpacket()) {
+				// LED indication
 				pulseLEDR();
+				// Copy received RF data from bufferRF to bufferCOM
 				copyBufferRF2COM();
+				// Data dend via SPI
 				startSPI(DLEN);
 			}
 		}
+
+		// Update SPIstatus, check SPI busy
 		if (getStatusSPI()) {
+			// Wait until message is picked up
 			continue;
 		}
+
+		// Anything received?
 		if (_SPIRX) {
+			// CRCM matched?
 			if (_SPICRCok) {
- 				DLEN = SPIpacketLength;
+				// Data lenght
+				DLEN = SPIpacketLength;
+				// Copy received SPI data from bufferCOM to bufferRF
 				copyBufferCOM2RF();
 				PIN = 0;
+				// Transmit the message
 				RFTXpacket();
+				// LED indication
 				pulseLEDG();
 			}
+			// Restart SPI communication
 			startSPI(0);
 		}
 	}
