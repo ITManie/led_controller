@@ -2087,10 +2087,10 @@ W = angled&lt;p&gt;
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0.1016" drill="0">
-<clearance class="0" value="0.0508"/>
+<clearance class="0" value="0.040640625"/>
 </class>
-<class number="1" name="3amp" width="1.1684" drill="0">
-<clearance class="1" value="0.4572"/>
+<class number="1" name="3amp" width="1.016" drill="0">
+<clearance class="1" value="0.4064"/>
 </class>
 </classes>
 <parts>
@@ -2113,11 +2113,11 @@ W = angled&lt;p&gt;
 <part name="P+6" library="supply1" deviceset="+5V" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="LED1" library="SparkFun-Connectors" deviceset="M02" device="5MM"/>
-<part name="LED2" library="SparkFun-Connectors" deviceset="M02" device="5MM"/>
 <part name="U1" library="SparkFun-PowerIC" deviceset="V_REG_78XX" device="-TO-220" value="MC78M05CT"/>
 <part name="P+1" library="supply1" deviceset="+12V" device=""/>
 <part name="P+5" library="supply1" deviceset="+12V" device=""/>
 <part name="P+2" library="supply1" deviceset="+12V" device=""/>
+<part name="LED2" library="SparkFun-Connectors" deviceset="M02" device="5MM"/>
 </parts>
 <sheets>
 <sheet>
@@ -2142,12 +2142,12 @@ W = angled&lt;p&gt;
 <instance part="IQRF" gate="G$1" x="175.26" y="22.86" rot="MR0"/>
 <instance part="P+6" gate="1" x="165.1" y="10.16" rot="R90"/>
 <instance part="GND8" gate="1" x="165.1" y="15.24" rot="R270"/>
-<instance part="LED1" gate="G$1" x="78.74" y="50.8" rot="MR180"/>
-<instance part="LED2" gate="G$1" x="78.74" y="33.02" rot="MR180"/>
+<instance part="LED1" gate="G$1" x="76.2" y="15.24"/>
 <instance part="U1" gate="G$1" x="99.06" y="66.04"/>
 <instance part="P+1" gate="1" x="86.36" y="66.04" rot="R90"/>
 <instance part="P+5" gate="1" x="81.28" y="66.04" rot="R270"/>
-<instance part="P+2" gate="1" x="88.9" y="50.8" rot="R270"/>
+<instance part="P+2" gate="1" x="86.36" y="5.08" rot="R270"/>
+<instance part="LED2" gate="G$1" x="76.2" y="33.02"/>
 </instances>
 <busses>
 </busses>
@@ -2302,28 +2302,29 @@ W = angled&lt;p&gt;
 <segment>
 <pinref part="LED1" gate="G$1" pin="1"/>
 <pinref part="P+2" gate="1" pin="+12V"/>
+<wire x1="83.82" y1="5.08" x2="83.82" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="1">
 <segment>
+<pinref part="Q3" gate="1" pin="C"/>
+<wire x1="93.98" y1="17.78" x2="83.82" y2="17.78" width="0.1524" layer="91"/>
 <pinref part="LED1" gate="G$1" pin="2"/>
-<pinref part="Q1" gate="1" pin="C"/>
-<wire x1="86.36" y1="48.26" x2="93.98" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="1">
 <segment>
-<pinref part="LED2" gate="G$1" pin="2"/>
-<pinref part="Q3" gate="1" pin="C"/>
-<wire x1="86.36" y1="30.48" x2="86.36" y2="17.78" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="17.78" x2="93.98" y2="17.78" width="0.1524" layer="91"/>
+<pinref part="Q2" gate="1" pin="C"/>
+<pinref part="LED2" gate="G$1" pin="1"/>
+<wire x1="93.98" y1="33.02" x2="83.82" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="1">
 <segment>
-<pinref part="Q2" gate="1" pin="C"/>
-<pinref part="LED2" gate="G$1" pin="1"/>
-<wire x1="93.98" y1="33.02" x2="86.36" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="Q1" gate="1" pin="C"/>
+<pinref part="LED2" gate="G$1" pin="2"/>
+<wire x1="93.98" y1="48.26" x2="83.82" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="48.26" x2="83.82" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
