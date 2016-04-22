@@ -19,14 +19,8 @@
 #define RX_FILTER 0
 
 void APPLICATION() {
-	uns8 mid0;
 	// Enable SPI
 	enableSPI();
-	// Get module info
-	moduleInfo();
-	// Get lowest byte of Module ID
-	mid0 = bufferINFO[0];
-	// XLP RX mode - RFIC is periodicaly switched ON/OFF
 	setRFmode(_WPE | _RX_STD | _TX_STD);
 	// Wait Packed End active so the toutRF can be set to minimum
 	toutRF = 1;
