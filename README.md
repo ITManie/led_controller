@@ -114,6 +114,9 @@ Arduino project to control RGB LED strip
 </tr>
 </table>
 
+## Schema
+![Schema](https://raw.githubusercontent.com/Roman3349/led-controller/master/eagle/schema.png)
+
 ## License
 led-controller is licensed under the GPLv3 license:
 
