@@ -1,4 +1,4 @@
-# led-controller
+# ![led-controller](https://raw.githubusercontent.com/Roman3349/led-controller/master/artwork/logo.png)
 
 [![Build Status](https://travis-ci.org/Roman3349/led-controller.svg?branch=master)](https://travis-ci.org/Roman3349/led-controller)
 [![Build Status](https://drone.io/github.com/Roman3349/led-controller/status.png)](https://drone.io/github.com/Roman3349/led-controller/latest)
