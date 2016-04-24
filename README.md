@@ -8,6 +8,18 @@
 
 Arduino project to control RGB LED strip
 
+## Part list
+ - [IQRF DS-START-04](http://eshop.iqrf.org/products/detail/DS-START-04)
+ - [IQRF BB-01](http://eshop.iqrf.org/products/detail/IQRF-BB-01)
+ - [IQRF GW-ETH-02A](http://eshop.iqrf.org/products/detail/GW-ETH-02A%2872D%29)
+ - [Arduino Nano](http://www.tme.eu/en/details/a000005/arduino-development-kits/arduino/arduino-nano/)
+ - 3x [STMicroelectronics TIP122](http://www.tme.eu/en/details/tip122/npn-tht-darlington-transistors/st-microelectronics/)
+ - [ON Semiconductor MC78M05CTG](http://www.tme.eu/en/details/mc78m05ctg/unregulated-voltage-regulators/on-semiconductor/)
+ - RGB LED strip (for example [OptoFlash OPRGB5060-6012B](http://www.tme.eu/en/details/oprgb5060-6012b/light-sources-led-ribbon/optoflash/))
+ - 5,5/2,1mm DC jack (for example [CLIFF FC68148](http://www.tme.eu/en/details/fc68148/dc-power-connectors/cliff/))
+ - 12V power supply (for example [ESPE ZSIDT12/3A](http://www.tme.eu/en/details/zsidt12_3a/mains-power-supplies/espe/))
+ - terminal block PCB mount (for example [Degson Electronics DG300-5.0-02P-12-00A(H)](http://www.tme.eu/en/details/dg300-5.0-2p12/terminal-blocks-pcb-mount/degson-electronics/dg300-50-02p-12-00ah/))
+
 ## Arduino libraries
 
  * [IQRF](https://github.com/ITManie/IQRF_library)
