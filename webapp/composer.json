@@ -3,35 +3,37 @@
 	"description": "Web application to control yout RGB LED strip via IQRF and Arduino.",
 	"homepage": "https://github.com/Roman3349/led-controller",
 	"type": "project",
-	"license": "GPL-3.0",
+	"license": ["GPL-3.0"],
 	"authors": [
 		{
 			"name": "Roman Ondráček",
-			"homepage": "https://github.com/Roman3349/"
+			"homepage": "https://github.com/Roman3349",
+			"email": "ondracek.roman@centrum.cz"
 		}
 	],
 	"require": {
-		"php": ">= 5.3.1",
-		"nette/application": "~2.3.6",
-		"nette/bootstrap": "~2.3.0",
-		"nette/caching": "~2.3.0",
-		"nette/database": "~2.3.0",
-		"nette/di": "~2.3.0",
-		"nette/finder": "~2.3.0",
-		"nette/forms": "~2.3.0",
-		"nette/http": "~2.3.0",
-		"nette/mail": "~2.3.0",
-		"nette/robot-loader": "~2.3.0",
-		"nette/safe-stream": "~2.3.0",
-		"nette/security": "~2.3.0",
-		"nette/utils": "~2.3.0",
-		"latte/latte": "~2.3.0",
-		"tracy/tracy": "~2.3.0",
+		"php": ">= 5.6.0",
+		"nette/application": "~2.3.12",
+		"nette/bootstrap": "~2.3.4",
+		"nette/caching": "~2.4.4",
+		"nette/database": "~2.3.8",
+		"nette/di": "~2.3.10",
+		"nette/finder": "~2.3.2",
+		"nette/forms": "~2.3.8",
+		"nette/http": "~2.3.6",
+		"nette/mail": "~2.3.5",
+		"nette/robot-loader": "~2.3.1",
+		"nette/safe-stream": "~2.3.2",
+		"nette/security": "~2.3.1",
+		"nette/utils": "~2.3.8",
+		"latte/latte": "~2.3.11",
+		"tracy/tracy": "~2.3.10",
 		"sandbox/passwordrecovery": "^1.1",
-		"minetro/recaptcha": "~1.5.0",
-		"janmarek/webloader": "^2.5"
+		"minetro/recaptcha": "~1.5.1",
+		"janmarek/webloader": "~2.5.0",
+		"roman3349/iqrf-cloud-nette": "dev-master"
 	},
 	"require-dev": {
-		"nette/tester": "~1.3"
+		"nette/tester": "~1.7.1"
 	}
 }
