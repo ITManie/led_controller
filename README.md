@@ -1,20 +1,18 @@
 # ![led-controller](https://raw.githubusercontent.com/Roman3349/led-controller/master/artwork/logo.png)
 
-[![Build Status](https://travis-ci.org/Roman3349/led-controller.svg?branch=master)](https://travis-ci.org/Roman3349/led-controller)
-[![Build Status](https://drone.io/github.com/Roman3349/led-controller/status.png)](https://drone.io/github.com/Roman3349/led-controller/latest)
-[![wercker status](https://app.wercker.com/status/6b206508930a2a129e1ea5bb58755907/s "wercker status")](https://app.wercker.com/project/bykey/6b206508930a2a129e1ea5bb58755907)
-[![Gitter](https://badges.gitter.im/Roman3349/led-controller.svg)](https://gitter.im/Roman3349/led-controller?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![GPLv3](http://img.shields.io/badge/license-GPLv3-blue.svg)](LICENSE)
+[![Travis CI](https://img.shields.io/travis/Roman3349/led-controller.svg?style=flat-square)](https://travis-ci.org/Roman3349/led-controller)
+[![Gitter](https://img.shields.io/gitter/room/Roman3349/led-controller.svg?style=flat-square)](https://gitter.im/Roman3349/led-controller)
+[![GPLv3](http://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square)](LICENSE)
 
 Arduino project to control RGB LED strip
 
 ## Part list
- - [IQRF DS-START-04](http://eshop.iqrf.org/products/detail/DS-START-04)
- - [IQRF BB-01](http://eshop.iqrf.org/products/detail/IQRF-BB-01)
- - [IQRF GW-ETH-02A](http://eshop.iqrf.org/products/detail/GW-ETH-02A%2872D%29)
- - [Arduino Nano](http://www.tme.eu/en/details/a000005/arduino-development-kits/arduino/arduino-nano/)
+ - IQRF Development set [IQRF DS-START-04](http://eshop.iqrf.org/products/detail/DS-START-04)
+ - IQRF Breakout board [IQRF BB-01](http://eshop.iqrf.org/products/detail/IQRF-BB-01)
+ - IQRF gateway (for example [IQRF GW-ETH-02A](http://eshop.iqrf.org/products/detail/GW-ETH-02A%2872D%29))
+ - Atmel MCU with Arduino firmware or Adruino (for example [Arduino Nano](http://www.tme.eu/en/details/a000005/arduino-development-kits/arduino/arduino-nano/))
  - 3x [STMicroelectronics TIP122](http://www.tme.eu/en/details/tip122/npn-tht-darlington-transistors/st-microelectronics/)
- - [ON Semiconductor MC78M05CTG](http://www.tme.eu/en/details/mc78m05ctg/unregulated-voltage-regulators/on-semiconductor/)
+ - 5V voltage stabiliser (for example [ON Semiconductor MC78M05CTG](http://www.tme.eu/en/details/mc78m05ctg/unregulated-voltage-regulators/on-semiconductor/))
  - RGB LED strip (for example [OptoFlash OPRGB5060-6012B](http://www.tme.eu/en/details/oprgb5060-6012b/light-sources-led-ribbon/optoflash/))
  - 5,5/2,1mm DC jack (for example [CLIFF FC68148](http://www.tme.eu/en/details/fc68148/dc-power-connectors/cliff/))
  - 12V power supply (for example [ESPE ZSIDT12/3A](http://www.tme.eu/en/details/zsidt12_3a/mains-power-supplies/espe/))
