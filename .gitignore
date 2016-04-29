@@ -1,4 +1,21 @@
+# Eagle files
 eagle/*.b#*
 eagle/*.job
 eagle/*.s#*
+
+# Composer lock file
 webapp/composer.lock
+webapp/vendor/*
+
+# LibreOffice lock file
+.~lock.*
+
+# Nette webapp files
+webapp/app/config/config.local.neon
+webapp/log/*
+webapp/temp/*
+!webapp/.htaccess
+!webapp/web.config
+
+# NetBeans project files
+webapp/nbproject/*

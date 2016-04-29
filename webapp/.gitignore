@@ -1,8 +1,0 @@
-log/*
-temp/*
-vendor/*
-nbproject/*
-!.gitignore
-!.htaccess
-!web.config
-app/config/config.local.neon
