@@ -121,7 +121,7 @@ void IqrfRx() {
   Serial.write(iqrf.RxBuf, IQRF_GetRxDataSize());
   Serial.println();
   #endif
-  if (isMyAddress) {
+  if (isMyAddress()) {
     uint8_t prot_version = iqrf.RxBuf[0];
     #ifdef DEBUG
     Serial.print("Protocol version: ");
