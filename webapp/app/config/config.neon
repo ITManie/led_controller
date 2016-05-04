@@ -20,3 +20,12 @@ services:
 	- App\Forms\FormFactory
 	- App\Forms\SignFormFactory
 	router: App\RouterFactory::createRouter
+
+extensions:
+    iqrf: IQRF\Cloud\DI\IQRFExtension
+
+iqrf:
+    apiUrl: '' # IQRF API URL
+    apiKey: 'k6wuaem3wtaiupmnuc7cziuvaup2fxim'
+    ipAddr: '127.0.0.1'
+    userName: 'admin'
