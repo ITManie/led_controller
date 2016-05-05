@@ -1,6 +1,7 @@
 # Eagle files
 eagle/*.b#*
 eagle/*.job
+eagle/*.pro
 eagle/*.s#*
 
 # Composer lock file
