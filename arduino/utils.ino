@@ -156,4 +156,3 @@ void IqrfTx(uint8_t txPktId, uint8_t txPktResult) {
   Serial.println("IQRF send done");
   #endif
 }
-

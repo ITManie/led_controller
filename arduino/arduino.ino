@@ -17,7 +17,7 @@
 
 /*
                       _____
-           __________| USB |__________ 
+           __________| USB |__________
           |          |_____|          |
  IQRF_SCK | [*]D13             D12[*] | IQRF_MISO
           | [ ]3.3V            D11[*]~| IQRF_MOSI
@@ -39,6 +39,7 @@
           | NANO-V3                   |
           |___________________________|
  */
+#include <Arduino.h>
 #include <SPI.h>
 #include <MsTimer2.h>
 #include <iqrf_library.h>
@@ -58,7 +59,7 @@ uint8_t ver = 0x00;
 /**
  * Data structure
  */
-typedef struct 
+typedef struct
 {
   uint8_t RxBuf[IQ_PKT_SIZE];
   uint8_t *TxBuf;
