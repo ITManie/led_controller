@@ -1,8 +1,8 @@
 # Eagle files
-eagle/*.b#*
-eagle/*.job
-eagle/*.pro
-eagle/*.s#*
+eagle/*/*.b#*
+eagle/*/*.job
+eagle/*/*.pro
+eagle/*/*.s#*
 
 # Composer lock file
 webapp/composer.lock
