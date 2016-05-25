@@ -59,8 +59,7 @@ uint8_t ver = 0x00;
 /**
  * Data structure
  */
-typedef struct
-{
+typedef struct {
   uint8_t RxBuf[IQ_PKT_SIZE];
   uint8_t *TxBuf;
   uint8_t testPktId;
@@ -89,10 +88,10 @@ void setup() {
   Serial.begin(9600);
   IQRF_Init(IqrfRx, IqrfTx);
   switch(IQRF_GetModuleType()) {
-    case TR_52D:
+    case trTypes::TR_52D:
       Serial.println("IQRF module: TR-52D");
       break;
-    case TR_72D:
+    case trTypes::TR_72D:
       Serial.println("IQRF module: TR-72D");
       break;
     default:

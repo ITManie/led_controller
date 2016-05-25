@@ -10,6 +10,6 @@ test-arduino:
     # Install atmelavr library
     - platformio platforms install atmelavr
     # Install MsTimer2 library
-    - platformio lib install 137 584
+    - platformio lib install 137 318
   script:
     - platformio ci arduino/ --board=uno
