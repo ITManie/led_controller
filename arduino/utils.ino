@@ -16,69 +16,66 @@
  */
 
 /**
- * IQRF timer
- * @param none
- * @return none
+ * 1ms timer callback
  */
-void cb_timer1ms() {
-  if (iqrf.appTimer && (--iqrf.appTimer) == 0) {
-    iqrf.appTimerAck = 1;
-    iqrf.appTimer = USER_TIMER_PERIOD;
+void msTimerCallback() {
+  // App timer, call handler
+  if (iqrf.timer && (--iqrf.timer) == 0) {
+    iqrf.timerAck = true;
+    iqrf.timer = USER_TIMER_PERIOD;
   }
 }
 
 /**
  * Check address from packet and address of controller
  * @param buf[] IQRF Rx buffer
- * @return true or false
+ * @return boolean
  */
-boolean isMyAddress(uint8_t buf[] = iqrf.RxBuf) {
-  uint8_t addr[4] = {buf[2], buf[3], buf[4], buf[5]};
-  return addr == my_addr ? true : false;
+boolean isMyAddress(uint8_t buf[] = iqrf.rxBuffer) {
+  if (buf[2] == my_addr[0] && buf[3] == my_addr[1] && buf[4] == my_addr[2] && buf[5] == my_addr[3]) {
+    return true;
+  }
+  return false;
 }
 
 /**
  * Recieve ping packet and call function sendPong
- * @param none
- * @return none
  */
 void receivePing() {
   #ifdef DEBUG
   Serial.println("Receive ping.");
   #endif
-  sendPong(my_addr, iqrf.TxBuf);
+  sendPong(my_addr, iqrf.txBuffer);
 }
 
 /**
  * Send pong packet (answer on the ping packet)
  * @param addr[] Address of this controller (defined in my_addr)
  * @param buf[] IQRF Tx buffer
- * @return none
  */
 void sendPong(uint8_t addr[], uint8_t buf[]) {
   uint8_t packet[6] = {0, 1, addr[0], addr[1], addr[2], addr[3]};
-  if (iqrf.appTimerAck) {
+  if (iqrf.timerAck) {
     // Alocate memory for Tx packet
     buf = (uint8_t *)malloc(sizeof(packet));
     if (buf != NULL) {
       // Copy data from packet to IQRF Tx packet
       memcpy(buf, (uint8_t *)&packet, sizeof(packet));
       // Dend data and unalocate data buffer
-      iqrf.testPktId = IQRF_SendData(buf, sizeof(packet), 1);
+      iqrf.packetId = IQRF_SendData(buf, sizeof(packet), 1);
       #ifdef DEBUG
       Serial.println("Sending pong.");
       #endif
     }
-    iqrf.appTimerAck = 0;
+    iqrf.timerAck = false;
   }
 }
 
 /**
  * Get data from set color packet and set color of RGB lED
  * @param buf[] IQRF Rx buffer
- * @return none
  */
-void setColor(uint8_t buf[] = iqrf.RxBuf) {
+void setColor(uint8_t buf[] = iqrf.rxBuffer) {
   uint8_t red_value = buf[6];
   uint8_t green_value = buf[7];
   uint8_t blue_value = buf[8];
@@ -92,7 +89,6 @@ void setColor(uint8_t buf[] = iqrf.RxBuf) {
  * @param green Value of green color (0-255)
  * @param blue Value of blue color (0-255)
  * @param alpha Value of alpha (0 - ON, 1 - OFF)
- * @return none
  */
 void setColorRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
   #ifdef DEBUG
@@ -106,29 +102,31 @@ void setColorRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     analogWrite(red_led, red);
     analogWrite(green_led, green);
     analogWrite(blue_led, blue);
+  } else {
+    digitalWrite(red_led, LOW);
+    digitalWrite(green_led, LOW);
+    digitalWrite(blue_led, LOW);
   }
 }
 
 /**
  * IQRF Rx handler
- * @param none
- * @return none
  */
-void IqrfRx() {
-  IQRF_GetRxData(iqrf.RxBuf, IQRF_GetRxDataSize());
+void rxHandler() {
+  IQRF_GetRxData(iqrf.rxBuffer, IQRF_GetRxDataSize());
   #ifdef DEBUG
   Serial.print("IQRF receive done: ");
-  Serial.write(iqrf.RxBuf, IQRF_GetRxDataSize());
+  Serial.write(iqrf.rxBuffer, IQRF_GetRxDataSize());
   Serial.println();
   #endif
   if (isMyAddress()) {
-    uint8_t prot_version = iqrf.RxBuf[0];
+    uint8_t prot_version = iqrf.rxBuffer[0];
     #ifdef DEBUG
     Serial.print("Protocol version: ");
     Serial.println(prot_version, HEX);
     #endif
     if (prot_version == 0) {
-      uint8_t prot_type = iqrf.RxBuf[1];
+      uint8_t prot_type = iqrf.rxBuffer[1];
       #ifdef DEBUG
       Serial.print("Protocol type: ");
       Serial.println(prot_type, HEX);
@@ -147,11 +145,10 @@ void IqrfRx() {
 
 /**
  * IQRF Tx gandler
- * @param txPktId
- * @param txPktResult
- * @return none
+ * @param packetId Packet ID
+ * @param packetResult Packet result
  */
-void IqrfTx(uint8_t txPktId, uint8_t txPktResult) {
+void txHandler(uint8_t packetId, uint8_t packetResult) {
   #ifdef DEBUG
   Serial.println("IQRF send done");
   #endif
