@@ -40,9 +40,8 @@
           |___________________________|
  */
 #include <Arduino.h>
-#include <SPI.h>
 #include <MsTimer2.h>
-#include <iqrf_library.h>
+#include <IQRF.h>
 
 #define DEBUG // Debug mode
 #define USER_TIMER_PERIOD 2000 // 2 sec
@@ -61,19 +60,23 @@ uint8_t my_addr[4] = {0x00, 0x00, 0x00, 0x00};
 // Set protocol version
 uint8_t ver = 0x00;
 
-/**
- * Data structure
- */
-typedef struct {
-  uint8_t rxBuffer[IQ_PKT_SIZE];
-  uint8_t *txBuffer;
-  uint8_t packetId;
-  volatile uint16_t timer;
-  volatile bool timerAck;
-} iqrf_t;
-iqrf_t iqrf;
+// Instances
+IQRF iqrf;
+IQRFTR iqrfTr;
 
 /**
+ * App data structure
+ */
+typedef struct {
+  uint8_t rxBuffer[PACKET_SIZE]; //!< Rx buffer
+  uint8_t *txBuffer; //!< Tx buffer
+  uint8_t packetId; //!< Packet ID
+  volatile uint16_t timer; //!< Timer
+  volatile bool timerAck; //!< Timer action
+} appVars_t;
+appVars_t appVars;
+
+/*
  * Define pins of RGB LED
  */
 const int red_led = 5;
@@ -88,12 +91,12 @@ void setup() {
   pinMode(green_led, OUTPUT);
   pinMode(blue_led, OUTPUT);
   Serial.begin(9600);
-  IQRF_Init(rxHandler, txHandler);
-  switch(IQRF_GetModuleType()) {
-    case TR_52D:
+  iqrf.begin(rxHandler, txHandler);
+  switch(iqrfTr.getModuleType()) {
+    case iqrfTr.types::TR_52D:
       Serial.println("IQRF module: TR-52D");
       break;
-    case TR_72D:
+    case iqrfTr.types::TR_72D:
       Serial.println("IQRF module: TR-72D");
       break;
     default:
@@ -102,8 +105,8 @@ void setup() {
   }
   MsTimer2::set(1, msTimerCallback);
   MsTimer2::start();
-  memset(&iqrf, 0, sizeof(iqrf_t));
-  iqrf.timer = USER_TIMER_PERIOD;
+  memset(&appVars, 0, sizeof(appVars_t));
+  appVars.timer = USER_TIMER_PERIOD;
   Serial.println("Init done.");
 }
 
@@ -112,5 +115,5 @@ void setup() {
  */
 void loop() {
   // TR module SPI comunication driver
-  IQRF_Driver();
+  iqrf.driver();
 }

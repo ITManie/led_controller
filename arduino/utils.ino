@@ -20,9 +20,9 @@
  */
 void msTimerCallback() {
   // App timer, call handler
-  if (iqrf.timer && (--iqrf.timer) == 0) {
-    iqrf.timerAck = true;
-    iqrf.timer = USER_TIMER_PERIOD;
+  if (appVars.timer && (--appVars.timer) == 0) {
+    appVars.timerAck = true;
+    appVars.timer = USER_TIMER_PERIOD;
   }
 }
 
@@ -31,7 +31,7 @@ void msTimerCallback() {
  * @param buf[] IQRF Rx buffer
  * @return boolean
  */
-boolean isMyAddress(uint8_t buf[] = iqrf.rxBuffer) {
+boolean isMyAddress(uint8_t buf[] = appVars.rxBuffer) {
   if (buf[2] == my_addr[0] && buf[3] == my_addr[1] && buf[4] == my_addr[2] && buf[5] == my_addr[3]) {
     return true;
   }
@@ -45,7 +45,7 @@ void receivePing() {
   #ifdef DEBUG
   Serial.println("Receive ping.");
   #endif
-  sendPong(my_addr, iqrf.txBuffer);
+  sendPong(my_addr, appVars.txBuffer);
 }
 
 /**
@@ -55,19 +55,19 @@ void receivePing() {
  */
 void sendPong(uint8_t addr[], uint8_t buf[]) {
   uint8_t packet[6] = {0, 1, addr[0], addr[1], addr[2], addr[3]};
-  if (iqrf.timerAck) {
+  if (appVars.timerAck) {
     // Alocate memory for Tx packet
     buf = (uint8_t *)malloc(sizeof(packet));
     if (buf != NULL) {
       // Copy data from packet to IQRF Tx packet
       memcpy(buf, (uint8_t *)&packet, sizeof(packet));
       // Dend data and unalocate data buffer
-      iqrf.packetId = IQRF_SendData(buf, sizeof(packet), 1);
+      appVars.packetId = iqrf.sendData(buf, sizeof(packet), 1);
       #ifdef DEBUG
       Serial.println("Sending pong.");
       #endif
     }
-    iqrf.timerAck = false;
+    appVars.timerAck = false;
   }
 }
 
@@ -75,7 +75,7 @@ void sendPong(uint8_t addr[], uint8_t buf[]) {
  * Get data from set color packet and set color of RGB lED
  * @param buf[] IQRF Rx buffer
  */
-void setColor(uint8_t buf[] = iqrf.rxBuffer) {
+void setColor(uint8_t buf[] = appVars.rxBuffer) {
   uint8_t red_value = buf[6];
   uint8_t green_value = buf[7];
   uint8_t blue_value = buf[8];
@@ -113,20 +113,20 @@ void setColorRGB(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
  * IQRF Rx handler
  */
 void rxHandler() {
-  IQRF_GetRxData(iqrf.rxBuffer, IQRF_GetRxDataSize());
+  iqrf.getData(appVars.rxBuffer, iqrf.getDataLength());
   #ifdef DEBUG
   Serial.print("IQRF receive done: ");
-  Serial.write(iqrf.rxBuffer, IQRF_GetRxDataSize());
+  Serial.write(appVars.rxBuffer, iqrf.getDataLength());
   Serial.println();
   #endif
   if (isMyAddress()) {
-    uint8_t prot_version = iqrf.rxBuffer[0];
+    uint8_t prot_version = appVars.rxBuffer[0];
     #ifdef DEBUG
     Serial.print("Protocol version: ");
     Serial.println(prot_version, HEX);
     #endif
     if (prot_version == 0) {
-      uint8_t prot_type = iqrf.rxBuffer[1];
+      uint8_t prot_type = appVars.rxBuffer[1];
       #ifdef DEBUG
       Serial.print("Protocol type: ");
       Serial.println(prot_type, HEX);
